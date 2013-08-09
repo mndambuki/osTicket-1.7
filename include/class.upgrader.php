@@ -102,6 +102,12 @@ class Upgrader {
             return $this->getCurrentStream()->check_mysql();
     }
 
+
+    function getTask() {
+        if($this->getCurrentStream())
+            return $this->getCurrentStream()->getTask();
+    }
+
     function doTask() {
         return $this->getCurrentStream()->doTask();
     }
@@ -263,7 +269,7 @@ class StreamUpgrader extends SetupWizard {
     function isFinished() {
         # TODO: 1. Check if current and target hashes match,
         #       2. Any pending tasks
-        return !($this->getNextPatch() || $this->getPendingTasks());
+        return !($this->getNextPatch() || $this->getPendingTask());
     }
 
     function readPatchInfo($patch) {
